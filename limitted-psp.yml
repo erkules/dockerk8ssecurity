@@ -1,0 +1,40 @@
+apiVersion: policy/v1beta1
+kind: PodSecurityPolicy
+metadata:
+  name: limitted
+spec:
+  privileged: false
+  allowPrivilegeEscalation: false
+  requiredDropCapabilities:     
+    - ALL
+  DefaultAddCapabilities:      
+  volumes:     
+    - 'configMap'
+    - 'secret'
+    - 'persistentVolumeClaim'
+  hostNetwork: false
+  hostIPC:     false
+  hostPID:     false
+  runAsUser:  
+    rule: 'MustRunAsNonRoot'
+  seLinux:                 
+    rule: 'RunAsAny'                       
+  supplementalGroups:
+    rule: 'RunAsAny'
+  fsGroup:
+    rule: 'RunAsAny'
+---
+kind: ClusterRole
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: limitted
+rules:
+- apiGroups:
+  - extensions
+  resources:
+  - podsecuritypolicies
+  verbs:
+  - use
+  resourceNames:
+  - limitted 
+

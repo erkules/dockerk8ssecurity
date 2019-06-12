@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: www
+spec:
+  securityContext:
+    runAsUser: 1000
+  containers:
+  - name: meinserver
+    image: erkules/nginxhostname
+    command:
+    - sleep 
+    - "5000"
+  terminationGracePeriodSeconds: 2
+
+

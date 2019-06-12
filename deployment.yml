@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: www
+spec:
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+  replicas: 4
+  minReadySeconds: 4
+  selector:
+    matchLabels:
+      app: www
+  template:
+    metadata:
+      name: www
+      labels:
+        app: www
+    spec:
+      securityContext:
+        runAsUser: 1000
+      containers:
+      - name: image1
+        image: erkules/nginxhostname
+        command:
+        - sleep
+        - "5000"
+

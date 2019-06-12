@@ -1,0 +1,35 @@
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata: 
+  name: limitted-k8s-11
+  namespace: k8s-11
+subjects:
+- kind: User
+  name: k8s-11-admin
+  namespace: k8s-11
+roleRef:
+  kind: ClusterRole
+  name: limitted
+  apiGroup: rbac.authorization.k8s.io
+
+#---
+#apiVersion: rbac.authorization.k8s.io/v1
+#kind: RoleBinding
+#metadata: 
+#  name: limitted-k8s-11
+#subjects:
+#- kind: ServiceAccount
+#  name: default
+#  namespace: k8s-11
+#- kind: User
+#  name: k8s-11-admin
+#  namespace: k8s-11
+#- kind: Group
+#  name: system:authenticated
+#  apiGroup: rbac.authorization.k8s.io
+#roleRef:
+#  kind: ClusterRole
+#  name: limitted
+#  apiGroup: rbac.authorization.k8s.io
+#
